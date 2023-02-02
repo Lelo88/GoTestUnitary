@@ -24,6 +24,14 @@ func TestSharkCannotHuntBecauseIsTired(t *testing.T) {
 }
 
 func TestSharkCannotHuntBecaisIsNotHungry(t *testing.T) {
+	shark := Shark{hungry: false}
+	prey := Prey{}
+	IsHungry := errors.New("cannot hunt, i am not hungry")
+
+	err := shark.Hunt(&prey)
+	assert.Error(t, err)
+	assert.Equal(t, IsHungry, err)
+
 }
 
 func TestSharkCannotReachThePrey(t *testing.T) {
