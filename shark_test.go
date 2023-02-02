@@ -8,7 +8,19 @@ import (
 )
 
 func TestSharkHuntsSuccessfully(t *testing.T) {
+	shark := Shark{hungry:true,tired:false,speed: 20}
+	prey := Prey{speed: 10}
+
+	err:=shark.Hunt(&prey)
 	
+	assert.NoError(t, err)
+	assert.Nil(t, err)
+
+	err = shark.Hunt(&prey)
+	
+	assert.Error(t, err)
+	assert.Equal(t, true,shark.tired)
+	assert.Equal(t, false, shark.hungry)
 	
 }
 
