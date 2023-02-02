@@ -17,7 +17,7 @@ func TestSharkHuntsSuccessfully(t *testing.T) {
 	assert.Nil(t, err)
 
 	err = shark.Hunt(&prey)
-	
+
 	assert.Error(t, err)
 	assert.Equal(t, true,shark.tired)
 	assert.Equal(t, false, shark.hungry)
@@ -57,4 +57,10 @@ func TestSharkCannotReachThePrey(t *testing.T) {
 }
 
 func TestSharkHuntNilPrey(t *testing.T) {
+	shark := Shark{hungry:true,tired:false,speed: 10}
+	prey := Prey{}
+
+	err:=shark.Hunt(&prey)
+	assert.Empty(t, err)
+	assert.NoError(t, err)
 }
