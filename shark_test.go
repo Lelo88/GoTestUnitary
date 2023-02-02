@@ -15,7 +15,7 @@ func TestSharkHuntsSuccessfully(t *testing.T) {
 func TestSharkCannotHuntBecauseIsTired(t *testing.T) {
 	//arrange
 	shark := Shark{tired: true}
-	prey := Prey{}
+	prey := Prey{name: "prey"}
 	IsTired := errors.New("cannot hunt, i am really tired")
 	//act 
 	err := shark.Hunt(&prey)
@@ -25,7 +25,7 @@ func TestSharkCannotHuntBecauseIsTired(t *testing.T) {
 
 func TestSharkCannotHuntBecaisIsNotHungry(t *testing.T) {
 	shark := Shark{hungry: false}
-	prey := Prey{}
+	prey := Prey{name: "prey"}
 	IsHungry := errors.New("cannot hunt, i am not hungry")
 
 	err := shark.Hunt(&prey)
@@ -35,6 +35,13 @@ func TestSharkCannotHuntBecaisIsNotHungry(t *testing.T) {
 }
 
 func TestSharkCannotReachThePrey(t *testing.T) {
+	shark := Shark{hungry:true,tired:false,speed: 10}
+	prey := Prey{speed: 20}
+	isFast := errors.New("could not catch it")
+
+	err:=shark.Hunt(&prey)
+	assert.Error(t, err)
+	assert.Equal(t, isFast, err)
 }
 
 func TestSharkHuntNilPrey(t *testing.T) {
